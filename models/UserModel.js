@@ -3,17 +3,23 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const Users = db.define('users',{
-    name:{
+const Users = db.define('usuario',{
+    idUsuario: {
+        type: DataTypes.NUMBER
+    },
+    nombre: {
         type: DataTypes.STRING
     },
-    email:{
+    apellido: {
         type: DataTypes.STRING
     },
-    password:{
+    correo:{
         type: DataTypes.STRING
     },
-    rol: {
+    contra:{
+        type: DataTypes.STRING
+    },
+    idTipoUsuario: {
         type: DataTypes.NUMBER
     },
     refresh_token:{

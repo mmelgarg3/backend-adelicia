@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async(req, res) => {
     try {
         const users = await Users.findAll({
-            attributes:['id','name','email']
+            attributes:['id','nombre','correo']
         });
         res.json(users);
     } catch (error) {
@@ -20,10 +20,11 @@ export const Register = async(req, res) => {
     const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
-            name: name,
-            email: email,
-            password: hashPassword,
-            role: role
+            nombre: name,
+            apellido: 'Lopez',
+            correo: email,
+            contra: hashPassword,
+            idTipoUsuario: role
         });
         res.json({msg: "Register"});
     } catch (error) {
@@ -35,20 +36,18 @@ export const Login = async(req, res) => {
     try {
         const user = await Users.findAll({
             where:{
-                email: req.body.email
+                correo: req.body.email
             }
         });
 
 
-        const {role} = req.body;
-        if(role != user.role) return res.status(400).json({msg: "This is not your role"});
 
-        const match = await bcrypt.compare(req.body.password, user[0].password);
+        const match = await bcrypt.compare(req.body.password, user[0].contra);
         if(!match) return res.status(400).json({msg: "Wrong Password"});
         
         const userId = user[0].id;
-        const name = user[0].name;
-        const email = user[0].email;
+        const name = user[0].nombre;
+        const email = user[0].correo;
         const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
             expiresIn: '20s'
         });
