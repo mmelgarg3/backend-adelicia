@@ -14,14 +14,14 @@ export const getUsers = async(req, res) => {
 }
 
 export const Register = async(req, res) => {
-    const { name, email, password, confPassword, role } = req.body;
+    const { name, surname,email, password, confPassword, role } = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "The password does not match"});
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
             nombre: name,
-            apellido: 'Lopez',
+            apellido: surname,
             correo: email,
             contra: hashPassword,
             idTipoUsuario: role
