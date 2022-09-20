@@ -15,14 +15,15 @@ export const getUsers = async(req, res) => {
 
 export const Register = async(req, res) => {
     const { name, surname,email, password,  role } = req.body;
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // console.log("password to save:" +  password);
+    // const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
             nombre: name,
             apellido: surname,
             correo: email,
-            contra: hashPassword,
+            contra: password,
             idTipoUsuario: role
         });
         res.json({msg: "Register"});
@@ -39,10 +40,10 @@ export const Login = async(req, res) => {
             }
         });
 
-
-
-        const match = await bcrypt.compare(req.body.password, user[0].contra);
-        if(!match) return res.status(400).json({msg: "Wrong Password"});
+        // const match = await bcrypt.compare(req.body.password, user[0].contra);
+        // console.log(match);
+        if(user[0].contra !== req.body.password) return res.status(400).json({msg: "Wrong password"});
+        // if(!match) return res.status(400).json({msg: "Wrong Password"});
         
         const userId = user[0].id;
         const name = user[0].nombre;

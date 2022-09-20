@@ -4,8 +4,9 @@ import db from "../config/Database.js";
 const { DataTypes } = Sequelize;
 
 const Users = db.define('usuario',{
-    idUsuario: {
-        type: DataTypes.NUMBER
+    id: {
+        type: DataTypes.NUMBER,
+        primaryKey: true
     },
     nombre: {
         type: DataTypes.STRING
