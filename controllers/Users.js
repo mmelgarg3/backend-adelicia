@@ -36,12 +36,14 @@ export const Login = async(req, res) => {
     try {
         const user = await Users.findAll({
             where:{
-                correo: req.body.email
+                correo: req.body.email,
             }
         });
 
         // const match = await bcrypt.compare(req.body.password, user[0].contra);
         // console.log(match);
+        console.log("id: " +  user[0].idTipoUsuario + " role: " + req.body.role);
+        if(user[0].idTipoUsuario != req.body.role) return res.status(400).json({msg: "This is not your role"});
         if(user[0].contra !== req.body.password) return res.status(400).json({msg: "Wrong password"});
         // if(!match) return res.status(400).json({msg: "Wrong Password"});
         
