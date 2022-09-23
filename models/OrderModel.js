@@ -10,6 +10,9 @@ const Order = db.define('pedido', {
         type: DataTypes.NUMBER,
         primaryKey: true
     },
+    fecha: {
+        type: DataTypes.DATE
+    },
     idUsuario: {
         type: DataTypes.NUMBER
     },
@@ -18,6 +21,8 @@ const Order = db.define('pedido', {
     }
 },
 {
+    createdAt: false,
+    updatedAt: false,
     freezeTableName: true
 });
 
