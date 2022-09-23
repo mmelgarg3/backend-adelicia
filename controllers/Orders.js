@@ -1,9 +1,10 @@
-import Order from "../models/OrderModel";
+import Order from "../models/OrderModel.js";
 
 export const RegisterOrder = async(req, res) =>{
     const { userId, total } = req.body;
     try{
         await Order.create({
+            fecha: new Date(),
             idUsuario: userId,
             totalPedido: total
         });
