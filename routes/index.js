@@ -16,8 +16,7 @@ router.delete('/logout', Logout);
 
 //routes for user
 router.get('/products', getProducts);
-
 //order routes
-router.get('/order', RegisterOrder);
+router.post('/create-order', RegisterOrder);
 
 export default router;
