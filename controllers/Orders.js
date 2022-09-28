@@ -28,3 +28,17 @@ export const getOrdersForCook = async(req, res)=>{
         console.log(error);
     }
 }
+
+
+export const changeToWaiter = async (req, res) =>{
+    try{
+        await Order.update({estado:2}, {
+            where:{
+                id: req.body.id
+            }
+        });
+    }
+    catch(err){
+        console.log(err)
+    }
+}
