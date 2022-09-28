@@ -15,12 +15,12 @@ export const RegisterOrder = async(req, res) =>{
     }
 }
 
-export const getOrdersForCook = async(req, res)=>{
+export const getOrdersByStatus = async(req, res)=>{
     try {
         const orders = await Order.findAll({
             attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
             where:{
-                estado: 1
+                estado: req.body.estado 
             }
         });
         res.json(orders);
@@ -28,6 +28,9 @@ export const getOrdersForCook = async(req, res)=>{
         console.log(error);
     }
 }
+
+
+
 
 export const FinishOrder = async ( req, res) =>{
     try{
