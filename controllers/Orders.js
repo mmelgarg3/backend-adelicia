@@ -37,7 +37,7 @@ export const FinishOrder = async ( req, res) =>{
     try{
         await Order.update({estado:3}, {
             where:{
-                id: req.query.id
+                id: req.body.query.id
             }
         });
     }
