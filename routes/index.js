@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
-import { RegisterOrder } from "../controllers/Orders.js";
+import { RegisterOrder, getOrdersForCook } from "../controllers/Orders.js";
 import { getProducts } from "../controllers/Products.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
@@ -16,6 +16,7 @@ router.delete('/logout', Logout);
 
 //routes for user
 router.get('/products', getProducts);
+router.get('/orders', getOrdersForCook);
 //order routes
 router.post('/create-order', RegisterOrder);
 
