@@ -16,6 +16,9 @@ const Order = db.define('pedido', {
     idUsuario: {
         type: DataTypes.NUMBER
     },
+    estado: {
+        type: DataTypes.NUMBER
+    },
     totalPedido: {
         type: DataTypes.DECIMAL
     }
