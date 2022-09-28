@@ -18,7 +18,10 @@ export const RegisterOrder = async(req, res) =>{
 export const getOrdersForCook = async(req, res)=>{
     try {
         const orders = await Order.findAll({
-            attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido']
+            attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
+            where:{
+                estado: 1
+            }
         });
         res.json(orders);
     } catch (error) {
