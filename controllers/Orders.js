@@ -29,6 +29,19 @@ export const getOrdersForCook = async(req, res)=>{
     }
 }
 
+export const FinishOrder = async ( req, res) =>{
+    try{
+        await Order.update({estado:3}, {
+            where:{
+                id: req.body.id
+            }
+        });
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 
 export const changeToWaiter = async (req, res) =>{
     try{
