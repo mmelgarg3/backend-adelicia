@@ -16,10 +16,10 @@ router.delete('/logout', Logout);
 
 //routes for user
 router.get('/products', getProducts);
-router.get('/orders', getOrderByStatus);
+router.get('/orders', getOrdersByStatus);
 //order routes
 router.post('/create-order', RegisterOrder);
-router.post('/change-state', changeToWaiter);
+router.post('/change-status', changeToWaiter);
 router.post('/finish-order', FinishOrder);
 
 export default router;
