@@ -16,11 +16,12 @@ export const RegisterOrder = async(req, res) =>{
 }
 
 export const getOrdersByStatus = async(req, res)=>{
+    console.log(req.query);
     try {
         const orders = await Order.findAll({
             attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
             where:{
-                estado: req.body.estado 
+                estado: req.query.estado 
             }
         });
         res.json(orders);
@@ -36,7 +37,7 @@ export const FinishOrder = async ( req, res) =>{
     try{
         await Order.update({estado:3}, {
             where:{
-                id: req.body.id
+                id: req.query.id
             }
         });
     }
