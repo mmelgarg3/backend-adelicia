@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
-import { RegisterOrder, getOrdersByStatus, changeToWaiter, FinishOrder } from "../controllers/Orders.js";
+import { getAllOrders, RegisterOrder, getOrdersByStatus, changeToWaiter, FinishOrder } from "../controllers/Orders.js";
 import { getProducts } from "../controllers/Products.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
@@ -21,5 +21,7 @@ router.get('/orders', getOrdersByStatus);
 router.post('/create-order', RegisterOrder);
 router.post('/change-status', changeToWaiter);
 router.post('/finish-order', FinishOrder);
+router.get('/all-orders', getAllOrders);
+
 
 export default router;
