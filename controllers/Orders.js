@@ -62,6 +62,18 @@ export const FinishOrder = async ( req, res) =>{
     }
 }
 
+export const CheckOrder = async ( req, res) =>{
+    try{
+        await Order.update({estado:4}, {
+            where:{
+                id: req.body.query.id
+            }
+        });
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 export const changeToWaiter = async (req, res) =>{
     try{
@@ -75,5 +87,4 @@ export const changeToWaiter = async (req, res) =>{
         console.log(err)
     }
 }
-
-
+    
