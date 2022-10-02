@@ -32,6 +32,22 @@ export const getOrdersByStatus = async(req, res)=>{
 
 
 
+export const getAllOrders = async(req, res)=>{
+    console.log(req.query);
+    try {
+        const orders = await Order.findAll({
+            attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
+            order: [
+                ['fecha', 'DESC']
+            ]
+        });
+        res.json(orders);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 
 export const FinishOrder = async ( req, res) =>{
     try{
