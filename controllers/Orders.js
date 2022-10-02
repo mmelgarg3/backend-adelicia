@@ -53,7 +53,7 @@ export const FinishOrder = async ( req, res) =>{
     try{
         await Order.update({estado:3}, {
             where:{
-                id: req.body.query.id
+                id: req.body.id
             }
         });
     }
@@ -75,3 +75,5 @@ export const changeToWaiter = async (req, res) =>{
         console.log(err)
     }
 }
+
+
