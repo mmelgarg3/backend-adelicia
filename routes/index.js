@@ -4,7 +4,7 @@ import { getAllOrders,
     RegisterOrder, 
     getOrdersByStatus, 
     changeToWaiter, 
-    FinishOrderea,
+    FinishOrder,
     CheckOrder } from "../controllers/Orders.js";
 import { getProducts } from "../controllers/Products.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
