@@ -39,7 +39,11 @@ export const getAllOrders = async(req, res)=>{
             attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
             order: [
                 ['fecha', 'DESC']
-            ]
+            ],
+            where: {
+                idUsuario: req.query.id 
+            }
+
         });
         res.json(orders);
     } catch (error) {
