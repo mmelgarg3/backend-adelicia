@@ -9,6 +9,7 @@ import { getAllOrders,
 import { getProducts } from "../controllers/Products.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
+import { registerInvoice } from "../controllers/Invoice.js";
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.post('/change-status', changeToWaiter);
 router.post('/finish-order', FinishOrder);
 router.post('/check-order', CheckOrder);
 router.get('/all-orders', getAllOrders);
+router.post('/create-invoice', registerInvoice);
 
 
 export default router;
