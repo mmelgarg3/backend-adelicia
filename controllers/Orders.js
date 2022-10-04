@@ -62,11 +62,11 @@ export const FinishOrder = async ( req, res) =>{
     }
 }
 
-export const CheckOrder = async ( req, res) =>{
+export const CheckOrder = async (idOrder) =>{
     try{
         await Order.update({estado:4}, {
             where:{
-                id: req.body.query.id
+                id: idOrder 
             }
         });
     }
