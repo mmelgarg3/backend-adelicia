@@ -1,4 +1,5 @@
 import Invoice from './../models/InvoiceModel.js';
+import { CheckOrder } from './Orders.js';
 
 
 export const registerInvoice = async(req, res) =>{
@@ -15,4 +16,7 @@ export const registerInvoice = async(req, res) =>{
     }catch(error){
         console.log(error);
     }
+
+    CheckOrder(idOrder);
+
 }
