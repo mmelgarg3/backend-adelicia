@@ -5,6 +5,7 @@ import { getAllOrders,
     getOrdersByStatus, 
     changeToWaiter, 
     FinishOrder,
+    cancelOrder,
     CheckOrder } from "../controllers/Orders.js";
 import { getProducts } from "../controllers/Products.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
@@ -30,6 +31,7 @@ router.post('/finish-order', FinishOrder);
 router.post('/check-order', CheckOrder);
 router.get('/all-orders', getAllOrders);
 router.post('/create-invoice', registerInvoice);
+router.post('/cancel-order', cancelOrder);
 
 
 export default router;
