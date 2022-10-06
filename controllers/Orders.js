@@ -1,14 +1,16 @@
 import Order from "../models/OrderModel.js";
 
 export const RegisterOrder = async(req, res) =>{
-    const { userId, total } = req.body;
+    const { userId, total, products} = req.body;
     try{
-        await Order.create({
+        const order_created = await Order.create({
             fecha: new Date(),
             idUsuario: userId,
             estado: 1,
             totalPedido: total
         });
+	console.log(order_created);
+	console.log("id: ", order_created.null);
         res.json({msg: "Orden realizada"});
     }catch(error){
         console.log(error);
