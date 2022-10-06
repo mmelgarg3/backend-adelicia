@@ -11,7 +11,7 @@ export const RegisterOrder = async(req, res) =>{
             totalPedido: total
         });
 	products.forEach((prd)=>{
-	  createOrderDetail(order_created.null, prd.id, 1, 6);
+	  createOrderDetail(order_created.null, prd.id, 1, 7);
 	});
         res.json({msg: "Orden realizada"});
     }catch(error){
