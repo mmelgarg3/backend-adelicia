@@ -31,6 +31,25 @@ export const getOrdersByStatus = async(req, res)=>{
 }
 
 
+export const getOrderById = async(req, res)=>{
+    console.log(req.query);
+    try {
+        const orders = await Order.findAll({
+            attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
+            order: [
+                ['fecha', 'DESC']
+            ],
+            where: {
+                idUsuario: req.query.id 
+            }
+
+        });
+        res.json(orders);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 export const getAllOrders = async(req, res)=>{
     console.log(req.query);

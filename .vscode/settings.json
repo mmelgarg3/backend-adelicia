@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e3a8b427-cad2-40c6-b816-d63a945aef02/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/adelicias-backend",
+    "appService.deploySubpath": "."
+}
