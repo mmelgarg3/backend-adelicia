@@ -20,7 +20,7 @@ export const createOrderDetail = async(orderId, productId, cant, descId)=>{
 export const getView = async(req, res)=>{
   try{
     const data = await View.findAll({
-      attributes: [idPedido, idProducto, idUsuario, totalPedido, descripcion]
+      attributes: ['idPedido', 'idProducto', 'idUsuario', 'totalPedido', 'descripcion']
     })
     res.json(data);
   }catch(err){
