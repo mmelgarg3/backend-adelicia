@@ -393,3 +393,47 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /
+
+-- PROCEDURES 
+
+-- Alta
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_AltaDetallePedido`(IN `Xid_idDetallePedido` INT(11), IN `Xid_idPedido` INT(11), IN `Xid_idProducto` INT(11), IN `Xid_cantidad` INT(5))
+BEGIN 
+INSERT ComplementoDetalle (idDetallePedido, idPedido, idProducto, cantidad, idDescuento, precioUnitario, valorDetalle, porcentajeDescuento, valorDescuento, valorTotal) VALUES (Xid_idDetallePedido,Xid_idPedido,Xid_idProducto,Xid_cantidad, 
+(select id
+from Descuento  where Descuento.idProducto=Xid_idProducto
+and Descuento.fechaIniciaDescuento<= (select fecha from Pedido where Pedido.id=Xid_idPedido)  
+and Descuento.fechaFinalizaDescuento>= (select fecha from Pedido where Pedido.id=Xid_idPedido)), 
+(select precio from Producto where Producto.id=Xid_idProducto),
+(cantidad * (select precio from Producto where Producto.id=Xid_idProducto)),
+(select porcentajeDescuento
+from Descuento  where Descuento.idProducto=Xid_idProducto
+and Descuento.fechaIniciaDescuento<= (select fecha from Pedido where Pedido.id=Xid_idPedido)  
+and Descuento.fechaFinalizaDescuento>= (select fecha from Pedido where Pedido.id=Xid_idPedido)),
+(valorDetalle * (porcentajeDescuento / 100)),
+(valorDetalle -   (ifnull(valorDescuento,0)))
+);
+UPDATE Pedido set totalPedido = (select sum(valorTotal) from complementoDetalle where id=Xid_idPedido) where id= Xid_idPedido;
+END$$
+DELIMITER ;
+
+
+
+
+
+
+-- baja 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_BajaDetallePedido`( 
+in Xid_idDetallePedido INT (11),
+in Xid_idPedido INT(11) ,
+in Xid_idProducto INT (11),
+in Xid_cantidad  INT(5)
+)
+BEGIN 
+DELETE From ComplementoDetalle where idDetallePedido=Xid_idDetallePedido;
+UPDATE Pedido set totalPedido = (select sum(valorTotal) from complementoDetalle where id=Xid_idPedido) where id= Xid_idPedido;
+END$$
+DELIMITER ;
