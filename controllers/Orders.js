@@ -1,4 +1,5 @@
 import Order from "../models/OrderModel.js";
+import  {createOrderDetail} from "../controllers/OrderDetail.js";
 
 export const RegisterOrder = async(req, res) =>{
     const { userId, total, products} = req.body;
@@ -9,8 +10,9 @@ export const RegisterOrder = async(req, res) =>{
             estado: 1,
             totalPedido: total
         });
-	console.log(order_created);
-	console.log("id: ", order_created.null);
+	products.forEach((prd)=>{
+	  createOrderDetail(order_created.null, prd.id, 1, 6);
+	});
         res.json({msg: "Orden realizada"});
     }catch(error){
         console.log(error);
@@ -18,7 +20,6 @@ export const RegisterOrder = async(req, res) =>{
 }
 
 export const getOrdersByStatus = async(req, res)=>{
-    console.log(req.query);
     try {
         const orders = await Order.findAll({
             attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
@@ -34,7 +35,6 @@ export const getOrdersByStatus = async(req, res)=>{
 
 
 export const getOrderById = async(req, res)=>{
-    console.log(req.query);
     try {
         const orders = await Order.findAll({
             attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],
@@ -54,7 +54,6 @@ export const getOrderById = async(req, res)=>{
 
 
 export const getAllOrders = async(req, res)=>{
-    console.log(req.query);
     try {
         const orders = await Order.findAll({
             attributes:['id', 'fecha', 'idUsuario', 'estado', 'totalPedido'],

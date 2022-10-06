@@ -1,4 +1,4 @@
-import OrderDetail from "../models/OrderDetailModel";
+import OrderDetail from "../models/OrderDetailModel.js";
 
 
 
@@ -14,3 +14,4 @@ export const createOrderDetail = async(orderId, productId, cant, descId)=>{
         console.log(err);
     }
 }
+
