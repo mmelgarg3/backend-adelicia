@@ -7,6 +7,7 @@ import { getAllOrders,
     FinishOrder,
     cancelOrder,
     CheckOrder } from "../controllers/Orders.js";
+import { getView } from "../controllers/OrderDetail.js";
 import { getProducts } from "../controllers/Products.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
@@ -24,6 +25,7 @@ router.delete('/logout', Logout);
 //routes for user
 router.get('/products', getProducts);
 router.get('/orders', getOrdersByStatus);
+router.get('/all-info', getView);
 //order routes
 router.post('/create-order', RegisterOrder);
 router.post('/change-status', changeToWaiter);
