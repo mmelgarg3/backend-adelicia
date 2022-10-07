@@ -1,6 +1,5 @@
 import OrderDetail from "../models/OrderDetailModel.js";
-import View from "../models/view_model.js";
-
+import mysqlConnection from "../db/index.js";
 
 
 export const createOrderDetail = async(orderId, productId, cant, descId)=>{
@@ -19,10 +18,16 @@ export const createOrderDetail = async(orderId, productId, cant, descId)=>{
 
 export const getView = async(req, res)=>{
   try{
-    const data = await View.findAll({
-      attributes: ['idPedido', 'idProducto', 'idUsuario', 'totalPedido', 'descripcion']
+    var sql = "select * from pedidos_vista1";
+    mysqlConnection.query(sql, (err, rows, fields) =>{
+      if(!err){
+	res.json(rows);
+      }
+      else{
+	console.log(err);
+      }
     })
-    res.json(data);
+
   }catch(err){
     console.log(err);
   }
