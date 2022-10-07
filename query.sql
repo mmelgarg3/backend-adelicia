@@ -445,3 +445,29 @@ DELIMITER ;
 
 
 
+--Alta Detalle Pedido
+DELIMITER $$
+CREATE TRIGGER TR_AltaDetallePedido
+after insert ON DetallePedido
+FOR EACH ROW
+BEGIN
+CALL SP_AltaDetallePedido  (NEW.idDetallePedido,NEW.idPedido, NEW.idProducto, NEW.cantidad );
+END $$
+
+/* Baja Detalle Pedido */
+DELIMITER $$
+CREATE TRIGGER TR_BajaDetallePedido
+after delete ON DetallePedido
+FOR EACH ROW
+BEGIN
+CALL SP_BajaDetallePedido  (OLD.idDetallePedido,OLD.idPedido, OLD.idProducto, OLD.cantidad );
+END $$
+
+/* Cambio Detalle Pedido */
+DELIMITER $$
+CREATE TRIGGER TR_CambioDetallePedido
+after update ON DetallePedido
+FOR EACH ROW
+BEGIN
+CALL SP_CambioDetallePedido  (NEW.idDetallePedido,NEW.idPedido, NEW.idProducto, NEW.cantidad );
+END $$
