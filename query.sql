@@ -394,6 +394,9 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /
 
+
+
+
 -- PROCEDURES 
 
 -- Alta
@@ -437,3 +440,8 @@ DELETE From ComplementoDetalle where idDetallePedido=Xid_idDetallePedido;
 UPDATE Pedido set totalPedido = (select sum(valorTotal) from complementoDetalle where id=Xid_idPedido) where id= Xid_idPedido;
 END$$
 DELIMITER ;
+
+
+
+
+
