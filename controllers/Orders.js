@@ -1,18 +1,27 @@
 import Order from "../models/OrderModel.js";
 import  {createOrderDetail} from "../controllers/OrderDetail.js";
+import mysqlConnection from "../db/index.js";
+
+
 
 export const RegisterOrder = async(req, res) =>{
     const { userId, total, products} = req.body;
     try{
-        const order_created = await Order.create({
-            fecha: new Date(),
-            idUsuario: userId,
-            estado: 1,
-            totalPedido: total
-        });
-	products.forEach((prd)=>{
-	  createOrderDetail(order_created.null, prd.id, 1, 7);
+        // const order_created = await Order.create({
+        //     fecha: new Date(),
+        //     idUsuario: userId,
+        //     estado: 1,
+        //     totalPedido: total
+        // });
+	var sql = "insert into pedido(fecha, idUsuario, estado, totalPedido)values ?";
+	var values = [[new Date(), userId, 1, total]]
+	mysqlConnection.query(sql, [values],(err, result)=>{
+	  if(err) throw err;
+	  products.forEach((prd)=>{
+	    createOrderDetail(result.insertId, prd.id, 1, 7);
+	  });
 	});
+
         res.json({msg: "Orden realizada"});
     }catch(error){
         console.log(error);
