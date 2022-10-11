@@ -19,7 +19,7 @@ export const createOrderDetail = async(orderId, productId, cant, descId)=>{
 export const getView = async(req, res)=>{
   try{
     // var sql = "select * from pedidos_vista1";
-    var sql = "SELECT complementodetalle.idPedido, complementodetalle.idProducto, usuario.nombre AS 'Usuario', pedido.totalPedido, producto.descripcion, usuario.id, producto.nombre FROM `complementodetalle` INNER JOIN pedido ON complementodetalle.idPedido = pedido.id INNER JOIN producto ON complementodetalle.idProducto = producto.id INNER JOIN usuario ON pedido.idUsuario = usuario.id;";
+    var sql = "SELECT complementodetalle.idPedido, pedido.fecha,complementodetalle.idProducto, usuario.nombre AS 'Usuario', pedido.totalPedido, producto.descripcion, usuario.id, producto.nombre FROM `complementodetalle` INNER JOIN pedido ON complementodetalle.idPedido = pedido.id INNER JOIN producto ON complementodetalle.idProducto = producto.id INNER JOIN usuario ON pedido.idUsuario = usuario.id;";
     mysqlConnection.query(sql, (err, rows, fields) =>{
       if(!err){
 	console.log(rows);
