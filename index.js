@@ -15,7 +15,7 @@ try {
 }
 
 app.set('port', process.env.PORT || 5000)
-// app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
+app.use(cors({ credentials:true, origin:'https://adelicias-front-app.azurewebsites.net' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
