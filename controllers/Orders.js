@@ -3,6 +3,8 @@ import  {createOrderDetail} from "../controllers/OrderDetail.js";
 import mysqlConnection from "../db/index.js";
 
 
+var globalId = 0;
+
 
 export const RegisterOrder = async(req, res) =>{
     const { userId, total, products} = req.body;
@@ -19,7 +21,7 @@ export const RegisterOrder = async(req, res) =>{
 	mysqlConnection.query(sql, [values],(err, result)=>{
 	  if(err) throw err;
 	  products.forEach((prd)=>{
-	    console.log(result.insertId);
+	    setId(result.insertId);
 	    createOrderDetail(result.insertId, prd.id, 1, 7);
 	  });
 	});
@@ -28,6 +30,15 @@ export const RegisterOrder = async(req, res) =>{
     }catch(error){
         console.log(error);
     }
+}
+
+const setId = (value)=>{
+  globalId = value;
+  console.log("global ID: ", globalId);
+  setTimeout(()=>{
+    updateOrder(globalId);
+  }, 300);
+  // updateOrder(globalId);
 }
 
 export const getOrdersByStatus = async(req, res)=>{
@@ -135,4 +146,32 @@ export const cancelOrder = async(req, res)=>{
     }
 }
     
+export const getLastId = async()=>{
+    try{
+      var sql = "select id from pedido ORDER BY id DESC LIMIT 1";
+      mysqlConnection.query(sql, (err, rows, fields) =>{
+	if(!err){
+	  console.log(rows);
+	  return rows;
+	}
+	else{
+	  console.log(err);
+	}
+      })
 
+    }catch(err){
+      console.log(err);
+    }
+}
+
+
+const updateOrder = (id)=>{
+  var sql = "CALL SP_CambioDetallePedido(?)"
+  mysqlConnection.query(sql, id, (err, result)=>{
+    if(err){
+      console.log(err);
+      return;
+    }
+    console.log(result);
+  });
+}
