@@ -13,11 +13,13 @@ export const RegisterOrder = async(req, res) =>{
         //     estado: 1,
         //     totalPedido: total
         // });
+	console.log(total);
 	var sql = "insert into pedido(fecha, idUsuario, estado, totalPedido)values ?";
 	var values = [[new Date(), userId, 1, total]]
 	mysqlConnection.query(sql, [values],(err, result)=>{
 	  if(err) throw err;
 	  products.forEach((prd)=>{
+	    console.log(result.insertId);
 	    createOrderDetail(result.insertId, prd.id, 1, 7);
 	  });
 	});
@@ -133,3 +135,4 @@ export const cancelOrder = async(req, res)=>{
     }
 }
     
+

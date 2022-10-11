@@ -3,16 +3,14 @@ import mysqlConnection from "../db/index.js";
 
 
 export const createOrderDetail = async(orderId, productId, cant, descId)=>{
-    try{
-        await OrderDetail.create({
-            idPedido: orderId,
-            idProducto: productId,
-            cantidad: cant,
-            idDescuento: descId
-        });
-    }catch(err){
-        console.log(err);
+  var values = [[orderId, productId, cant, descId]];
+  var sql = "insert into detallepedido(idPedido, idProducto, cantidad, idDescuento) values ?";
+  mysqlConnection.query(sql, [values], (result, err)=>{
+    if(err) console.log(err);
+    else{
+      console.log(result);
     }
+  })
 }
 
 
