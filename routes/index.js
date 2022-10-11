@@ -34,6 +34,9 @@ router.post('/check-order', CheckOrder);
 router.get('/all-orders', getAllOrders);
 router.post('/create-invoice', registerInvoice);
 router.post('/cancel-order', cancelOrder);
+router.get('/', (req, res)=>{
+  res.json('Bienvenido a la api');
+});
 
 
 export default router;
