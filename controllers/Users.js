@@ -34,6 +34,8 @@ export const Register = async(req, res) => {
 
 export const Login = async(req, res) => {
     try {
+	res.json(req.body.email);
+	
         const user = await Users.findAll({
             where:{
                 correo: req.body.email,
@@ -68,7 +70,7 @@ export const Login = async(req, res) => {
         res.json({ accessToken });
     } catch (error) {
         console.log(error);
-        res.status(404).json({msg:"Email required not Username"});
+	res.json(error);
     }
 }
 
