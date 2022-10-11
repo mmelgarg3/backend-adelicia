@@ -34,7 +34,7 @@ export const Register = async(req, res) => {
 
 export const Login = async(req, res) => {
     try {
-	res.json(req.body.email);
+	// res.json(req.body.email);
 	
         const user = await Users.findAll({
             where:{
