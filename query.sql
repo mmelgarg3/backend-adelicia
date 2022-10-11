@@ -465,9 +465,11 @@ END $$
 
 /* Cambio Detalle Pedido */
 DELIMITER $$
-CREATE TRIGGER TR_CambioDetallePedido
-after update ON DetallePedido
-FOR EACH ROW
-BEGIN
-CALL SP_CambioDetallePedido  (NEW.idDetallePedido,NEW.idPedido, NEW.idProducto, NEW.cantidad );
-END $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CambioDetallePedido`(IN `Xid_idPedido` INT(11))
+BEGIN 
+UPDATE Pedido set totalPedido = (select sum(valorTotal) from complementoDetalle where idPedido=Xid_idPedido) where id= Xid_idPedido;
+END$$
+DELIMITER ;
+
+
+
