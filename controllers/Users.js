@@ -42,35 +42,16 @@ export const Login = async(req, res) => {
             }
         });
 
-        // const match = await bcrypt.compare(req.body.password, user[0].contra);
-        // console.log(match);
         console.log("id: " +  user[0].idTipoUsuario + " role: " + req.body.role);
         if(user[0].idTipoUsuario != req.body.role) return res.status(400).json({msg: "This is not your role"});
         if(user[0].contra !== req.body.password) return res.status(400).json({msg: "Wrong password"});
-        // if(!match) return res.status(400).json({msg: "Wrong Password"});
-        
         const userId = user[0].id;
         const name = user[0].nombre;
         const email = user[0].correo;
-        const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '20s'
-        });
-        const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
-            expiresIn: '1d'
-        });
-        await Users.update({refresh_token: refreshToken},{
-            where:{
-                id: userId
-            }
-        });
-        res.cookie('refreshToken', refreshToken,{
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000
-        });
-        res.json({ accessToken });
+	res.json({userId, name, email});
     } catch (error) {
         console.log(error);
-	res.json(error);
+	res.json("Debes colocar tu Correo no tu usuario");
     }
 }
 

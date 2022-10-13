@@ -1,14 +1,21 @@
 import mysql from "mysql";
 
 
+// const mysqlConnection = mysql.createConnection({
+//     host: 'azdb6789-mysql-adelicias.mysql.database.azure.com',
+//     user:'mmelgar',
+//     database:'restauranteadelicias',
+//     password:'David$2020',
+//     multipleStatements: true
+// });
+
 const mysqlConnection = mysql.createConnection({
-    host: 'azdb6789-mysql-adelicias.mysql.database.azure.com',
-    user:'mmelgar',
+    host: 'localhost',
+    user:'root',
     database:'restauranteadelicias',
-    password:'David$2020',
+    password:'',
     multipleStatements: true
 });
-
 
 mysqlConnection.connect((err) =>{
     if(err){
