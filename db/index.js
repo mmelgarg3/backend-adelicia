@@ -6,7 +6,10 @@ const mysqlConnection = mysql.createConnection({
     user:'mmelgar',
     database:'restauranteadelicias',
     password:'David$2020',
-    multipleStatements: true
+    multipleStatements: true,
+    ssl:{
+      require: true
+    } 
 });
 
 // const mysqlConnection = mysql.createConnection({

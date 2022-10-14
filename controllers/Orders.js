@@ -29,6 +29,7 @@ export const RegisterOrder = async(req, res) =>{
         res.json({msg: "Orden realizada"});
     }catch(error){
         console.log(error);
+	res.json("error al insertar");
     }
 }
 
